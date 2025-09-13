@@ -161,6 +161,11 @@
   transform: scale(1.05);
 }
 
+a#instagramLink, a#whatsappLink {
+  position: relative;
+  z-index: 10;
+}
+
   </style>
 </head>
 <body>
@@ -181,7 +186,7 @@
   <section class="banner">
     <h1 class="animate__animated animate__zoomIn">Dandiya Raasotsav 2025</h1>
     <p class="animate__animated animate__fadeInUp">Dance • Celebrate • Connect</p>
-    <p class="animate__animated animate__fadeInUp">27th October | 5:30 PM Onwards</p>
+    <p class="animate__animated animate__fadeInUp">27th September | 5:30 PM Onwards</p>
   </section>
 
   <!-- Event Details -->
@@ -190,7 +195,7 @@
     <!-- Event Highlights -->
     <div class="col-md-6" data-aos="fade-right">
       <div class="h-100 p-4 rounded-4 shadow-lg" style="background-color: rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center;">
-        <h2 class="mb-3" style="color: #fff;">Event Highlights</h2>
+        <h2 class="mb-3" style="color: #fff;">Event Highlights2</h2>
         <p style="color: #f0f0f0; font-size: 1.1rem;">
           💃 Experience electrifying Garba nights with live singers, DJs, food stalls, and competitions. Celebrate the festive spirit of NavRaang like never before!
         </p>
@@ -222,53 +227,6 @@
   </div>
 </section>
 
-
-  <!-- Ticket Pricing -->
- <section class="container py-5">
-    <h2 class="text-center mb-5 fw-bold text-gradient">🎟️ Tickets & Pricing</h2>
-    <div class="row g-4">
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-          <div class="card-icon mb-3">👦</div>
-          <h5 class="fw-bold">Kids Pass</h5>
-          <p class="fs-4 text-success">₹399</p>
-          <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="General Pass - ₹399">Book Now</button>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-          <div class="card-icon mb-3">🙋</div>
-          <h5 class="fw-bold">General Pass</h5>
-          <p class="fs-4 text-primary">₹499</p>
-          <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="General Pass - ₹499">Book Now</button>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-          <div class="card-icon mb-3">💑</div>
-          <h5 class="fw-bold">Couple Pass</h5>
-          <p class="fs-4 text-danger">₹899</p>
-          <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Couple Pass - ₹899">Book Now</button>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-          <div class="card-icon mb-3">👨‍👩‍👧‍👦</div>
-          <h5 class="fw-bold">Group Pass (3 Max)</h5>
-          <p class="fs-4 text-warning">₹1399</p>
-          <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Group Pass - ₹1399">Book Now</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-
 <!-- Booking Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg"> <!-- larger modal for 2 columns -->
@@ -294,9 +252,7 @@
             <!-- Email -->
             <div class="col-md-6">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email"
-                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                     placeholder="Enter your email" required>
+              <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter your email" required>
               <div class="invalid-feedback">
                 Please enter a valid email address.
               </div>
@@ -334,38 +290,103 @@
 
           <!-- Footer -->
           <div class="modal-footer border-0">
-            <a href="https://wa.me/917058746046?text=BOOK%20GARBA_RAAS%20500"
-               target="_blank"
-               id="proceedBtn"
-               class="btn book-btn w-100 text-white text-decoration-none disabled">
-              Proceed to Payment
-            </a>
+            <button type="button"
+                    id="proceedBtn"
+                    onclick="proceedToPayment()"
+                    class="btn book-btn w-100 text-white text-decoration-none disabled">
+              Proceed to Booking
+            </button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+<section class="container py-5">
+  <h2 class="text-center mb-5 fw-bold text-gradient">🎟️ Tickets & Pricing</h2>
+
+  <!-- First row (2 cards) -->
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
+        <div class="card-icon mb-3">👦</div>
+        <h5 class="fw-bold">Kids Entry</h5>
+        <p class="fs-4 text-success">₹399</p>
+        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Kids Entry - ₹399">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-5">
+      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
+        <div class="card-icon mb-3">🙋</div>
+        <h5 class="fw-bold">Regular Ticket</h5>
+        <p class="fs-4 text-primary">₹499</p>
+        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Regular Ticket - ₹499">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second row (3 cards) -->
+  <div class="row g-4 justify-content-center mt-3">
+    <div class="col-md-6 col-lg-4">
+      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
+        <div class="card-icon mb-3">💑</div>
+        <h5 class="fw-bold">Couple Pass</h5>
+        <p class="fs-4 text-danger">₹899</p>
+        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Couple Pass - ₹899">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
+        <div class="card-icon mb-3">👨‍👩‍👧‍👦</div>
+        <h5 class="fw-bold">Group of 3 Pass</h5>
+        <p class="fs-4 text-warning">₹1399</p>
+        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Group of 3 Pass - ₹1399">Book Now</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
+        <div class="card-icon mb-3">👨‍👩‍👧‍👦</div>
+        <h5 class="fw-bold">Group of 5 Pass</h5>
+        <p class="fs-4 text-warning">₹2199</p>
+        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Group of 5 Pass - ₹2199">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
   
 
   <!-- Social Links -->
   <section class="social-section text-center my-5">
     <h4 class="fw-bold text-gradient">📲 Connect with Us</h4>
     <div class="d-flex justify-content-center gap-5 mt-3 flex-wrap">
-      <!-- WhatsApp -->
+
       <div class="text-center">
-        <a href="https://wa.me/message/G2725CU5Q47CB1" target="_blank">
-          <img src="./WhatsApp.jpeg" alt="WhatsApp QR" class="social-qr">
+        <!-- WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone=919665229671&text=Hi%20I%20want%20to%20book%20tickets%20for%20Dandiya!" 
+           target="_blank" style="text-decoration:none; color:#eae1e4;" id="whatsappLink">
+          <img src="./assets/WhatsApp.jpeg" alt="WhatsApp QR" class="social-qr"><br>
+          WhatsApp
         </a>
-        <p style="color:#25D366; margin-top:8px;">WhatsApp</p>
       </div>
-      <!-- Instagram -->
+      
       <div class="text-center">
-        <a href="https://www.instagram.com/divine_events_and_company?utm_source=qr&igsh=eGgzc2V6MDVhNmV2" target="_blank">
-          <img src="./insta.jpeg" alt="Instagram QR" class="social-qr">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/divine_events_and_company" 
+           target="_blank" style="text-decoration:none; color:#eae1e4;" id="instagramLink">
+          <img src="./assets/insta.jpeg" alt="Instagram QR" class="social-qr"><br>
+          Instagram
         </a>
-        <p style="color:#eae1e4; margin-top:8px;">Instagram</p>
       </div>
+    
     </div>
   </section>
   
@@ -396,16 +417,86 @@
     <p>© 2025 Dandiya Raasotsav | Made with ❤️</p>
   </footer>
 
-
-
   <script>
+
+  document.getElementById("whatsappLink").addEventListener("click", function(event) {
+    event.preventDefault(); // stop default link behavior
+    const url = this.getAttribute("href"); // get href
+    console.log("Opening WhatsApp link:", url);
+    window.open(url, "_blank"); // open in new tab/window
+  });
+
+    function proceedToPayment() {
+      // Collect form values
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const passType = document.getElementById("selectedPass").value;
+      const quantity = document.getElementById("passQuantity").value;
+      const total = document.getElementById("totalAmount").value;
+    
+      // If form invalid, block
+      const form = document.getElementById("bookingForm");
+      
+      if (!form.checkValidity()) {
+        form.reportValidity(); // Show validation messages
+        return;
+      }
+      
+        // ✅ If valid: close modal
+  const bookingModalEl = document.getElementById('bookingModal');
+  const bookingModal = bootstrap.Modal.getInstance(bookingModalEl) 
+                        || new bootstrap.Modal(bookingModalEl);
+  bookingModal.hide();
+
+  // ✅ Reset form after modal closes
+  bookingModalEl.addEventListener('hidden.bs.modal', function () {
+    form.reset();
+    document.getElementById("proceedBtn").classList.add('disabled'); // if you’re disabling it
+  }, { once: true }); // once → only runs one time
+
+
+    
+      // WhatsApp number
+      const phoneNumber = "919665229671";
+    
+      // Message template
+      const message = `Name: ${name} \nEmail: ${email} \nPhone: ${phone} \nPass: ${passType} \nQuantity: ${quantity} \nTotal: ₹${total}`;
+    
+      // Open WhatsApp with filled message
+      const url = `https://wa.me/${phoneNumber}?text=${message}`;
+      window.open(url, "_blank");
+    }
+
     document.getElementById('name').addEventListener('input', function () {
       // Replace anything that's NOT a-z or space
       this.value = this.value.replace(/[^A-Za-z ]/g, '');
     });
-    </script>
-  
-  <script>
+
+    
+  const phoneInput = document.getElementById('phone');
+
+  // Allow only numbers (block letters/symbols)
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/[^0-9]/g, ''); // remove non-numbers
+  });
+
+  // Validate on blur or while typing
+  phoneInput.addEventListener('blur', validatePhone);
+  phoneInput.addEventListener('keyup', validatePhone);
+
+  function validatePhone() {
+    const phone = phoneInput.value.trim();
+    if (/^[0-9]{10}$/.test(phone)) {
+      phoneInput.classList.remove('is-invalid');
+      phoneInput.classList.add('is-valid');
+    } else {
+      phoneInput.classList.remove('is-valid');
+      phoneInput.classList.add('is-invalid');
+    }
+  }
+
+
     // Disable/Enable button based on form validity
     const form = document.getElementById('bookingForm');
     const proceedBtn = document.getElementById('proceedBtn');
@@ -423,11 +514,9 @@
       form.reset();
       proceedBtn.classList.add('disabled');
     });
-    </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
     const bookingModal = document.getElementById('bookingModal');
+    const ticketInput = document.getElementById("selectedPass");
     bookingModal.addEventListener('show.bs.modal', event => {
       const button = event.relatedTarget;
       const ticket = button.getAttribute('data-ticket');
@@ -442,9 +531,13 @@
       const name = document.getElementById('userName').value;
       const email = document.getElementById('userEmail').value;
       const phone = document.getElementById('userPhone').value;
-
+      const pass = document.getElementById('selectedPass').value;
+      const quantity = document.getElementById('passQuantity').value;
+      const amount = document.getElementById('totalAmount').value;
+	  
+  	  const newMeesage = `Name: ${name} \nPhone: ${phone} \nEmail: ${email} \n\Pass: ${pass}\nQuantity: ${quantity}\nAmount: ${amount} `;
       const message = `🎟️ Ticket Booking Request\n\nTicket: ${ticket}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-      const url = `https://wa.me/message/G2725CU5Q47CB1?text=${encodeURIComponent(message)}`;
+      const url = `https://wa.me/message/G2725CU5Q47CB1?text=${encodeURIComponent(newMeesage)}`;
 
       window.open(url, '_blank');
       bookingModal.querySelector('form').reset();
@@ -580,7 +673,7 @@
           `🎟️ Ticket Booking Request\n\nPass: ${passType}\nQuantity: ${qty}\nTotal: ${total}\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
 
         // WhatsApp number — update if you need other flow (payment first etc.)
-        const whatsappNumber = '917058746046';
+        const whatsappNumber = '919665229671';
         const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
         // open WhatsApp in new tab
@@ -619,7 +712,54 @@
     if (submitBtn) submitBtn.disabled = true;
 
   })();
-  </script>
+
+// </ -------------------------- Name Vaildation ---------------------------/>
+
+
+  const nameInput = document.getElementById('name');
+
+// Validate on blur or while typing
+nameInput.addEventListener('blur', validateName);
+nameInput.addEventListener('keyup', validateName);
+
+function validateName() {
+  const name = nameInput.value.trim();
+
+  // Regex: only letters and spaces, at least 2 characters
+  const namePattern = /^[A-Za-z ]{2,}$/;
+
+  if (namePattern.test(name)) {
+    nameInput.classList.remove('is-invalid');
+    nameInput.classList.add('is-valid');
+  } else {
+    nameInput.classList.remove('is-valid');
+    nameInput.classList.add('is-invalid');
+  }
+}
+
+// </ -------------------------- Email Vaildation ---------------------------/>
+
+const emailInput = document.getElementById('email');
+
+// Validate on blur or while typing
+emailInput.addEventListener('blur', validateEmail);
+emailInput.addEventListener('keyup', validateEmail);
+
+function validateEmail() {
+  const email = emailInput.value.trim();
+
+  // Simple regex for email validation
+  const emailPattern = /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+
+  if (emailPattern.test(email)) {
+    emailInput.classList.remove('is-invalid');
+    emailInput.classList.add('is-valid');
+  } else {
+    emailInput.classList.remove('is-valid');
+    emailInput.classList.add('is-invalid');
+  }
+}
+
+</script>
 </body>
 </html>
-
