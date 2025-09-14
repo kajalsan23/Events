@@ -79,7 +79,29 @@
   position: relative;
   z-index: 10;
     }
-  </style>
+
+    .logo-container img {
+  max-width: 220px;
+  height: auto;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+}
+
+
+
+.flanky-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px #ffd700) drop-shadow(0 0 10px #ff9800);
+  }
+  to {
+    filter: drop-shadow(0 0 15px #ffc107) drop-shadow(0 0 25px #ff5722);
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -227,6 +249,22 @@
     </div>
   </div>
 </section>
+
+<!-- =================== Organized By =================== -->
+<!-- <div class="text-center py-4" style="background: rgba(255,255,255,0.05); z-index: 1; position: relative;">
+  <p class="mb-2" style="color: #f0eaea; font-size: 1.2rem;">Organized by</p>
+  <img src="./assets/logo.jpeg" alt="Divine Events & Co" style="max-width: 100px; height: auto;">
+</div> -->
+
+<div class="text-center py-4" style="z-index: 2; position: relative;">
+  <p class="mb-2 text-white fs-5">Organized by</p>
+  <img 
+    src="./assets/logo.jpeg" 
+    alt="Divine Events & Co Logo" 
+    class="animate__animated animate__pulse animate__infinite" 
+    style="max-width: 150px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9));"
+  >
+</div>
 
 <!-- =================== Footer =================== -->
 <footer>
