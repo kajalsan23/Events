@@ -166,7 +166,11 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Quantity</label>
-              <input type="number" class="form-control" id="passQuantity" min="1" value="1" required>
+              <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" id="decreaseQty">-</button>
+                <input type="text" class="form-control text-center" id="passQuantity" value="1" readonly required>
+                <button class="btn btn-outline-secondary" type="button" id="increaseQty">+</button>
+              </div>
             </div>
             <div class="col-md-6">
               <label class="form-label">Total Amount</label>
@@ -344,22 +348,61 @@ document.addEventListener("DOMContentLoaded", loadTickets);
   // document.addEventListener("DOMContentLoaded", loadTickets);
 
   // ----- Modal logic -----
-  bookingModalEl.addEventListener('show.bs.modal', event => {
-    const button = event.relatedTarget;
-    const ticketText = button.getAttribute('data-ticket');
-    selectedPassInput.value = ticketText;
-    const match = ticketText.match(/₹(\d+)/);
-    selectedPrice = match ? parseInt(match[1]) : 0;
-    passQuantityInput.value = 1;
-    totalAmountInput.value = '₹' + selectedPrice;
-    proceedBtn.disabled = true;
-  });
+  
+  // bookingModalEl.addEventListener('show.bs.modal', event => {
+  //   const button = event.relatedTarget;
+  //   const ticketText = button.getAttribute('data-ticket');
+  //   selectedPassInput.value = ticketText;
+  //   const match = ticketText.match(/₹(\d+)/);
+  //   selectedPrice = match ? parseInt(match[1]) : 0;
+  //   passQuantityInput.value = 1;
+  //   totalAmountInput.value = '₹' + selectedPrice;
+  //   proceedBtn.disabled = true;
+  // });
 
-  passQuantityInput.addEventListener('input', () => {
-    let qty = Math.max(1, parseInt(passQuantityInput.value)||1);
-    passQuantityInput.value = qty;
-    totalAmountInput.value = '₹' + (selectedPrice * qty);
-  });
+  // passQuantityInput.addEventListener('input', () => {
+  //   let qty = Math.max(1, parseInt(passQuantityInput.value)||1);
+  //   passQuantityInput.value = qty;
+  //   totalAmountInput.value = '₹' + (selectedPrice * qty);
+  // });
+
+  bookingModalEl.addEventListener('show.bs.modal', event => {
+  const button = event.relatedTarget;
+  const ticketText = button.getAttribute('data-ticket');
+  selectedPassInput.value = ticketText;
+
+  const match = ticketText.match(/₹(\d+)/);
+  selectedPrice = match ? parseInt(match[1], 10) : 0;
+
+  passQuantityInput.value = 1;
+  totalAmountInput.value = '₹' + selectedPrice;
+
+  proceedBtn.disabled = true;
+});
+
+// Handle +/- buttons for quantity
+const increaseBtn = document.getElementById("increaseQty");
+const decreaseBtn = document.getElementById("decreaseQty");
+
+increaseBtn.addEventListener("click", () => {
+  let qty = parseInt(passQuantityInput.value) || 1;
+  passQuantityInput.value = qty + 1;
+  updateTotal();
+});
+
+decreaseBtn.addEventListener("click", () => {
+  let qty = parseInt(passQuantityInput.value) || 1;
+  if (qty > 1) passQuantityInput.value = qty - 1;
+  updateTotal();
+});
+
+// Update total price
+function updateTotal() {
+  let qty = Math.max(1, parseInt(passQuantityInput.value) || 1);
+  passQuantityInput.value = qty;
+  totalAmountInput.value = '₹' + (selectedPrice * qty);
+}
+
 
   // ----- Modal Form validation & WhatsApp submit -----
 
