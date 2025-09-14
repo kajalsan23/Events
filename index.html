@@ -3,299 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dandiya Raasotsav 2025 </title>
+  <title>Dandiya Raasotsav 2025</title>
 
-  <!-- Bootstrap -->
+  <!-- ======= CSS Libraries ======= -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  
-  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+  <!-- ======= Custom Styles ======= -->
   <style>
+    /* ---------- Body & Background ---------- */
     body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding:0;
-  overflow-x: hidden;
-  position: relative;
-
-  /* Animated Gradient */
-  background: linear-gradient(135deg, #4a148c, #d81b60, #ffca28);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-}
-
-/* Gradient Animation */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-    /* Floating glowing dots animation */
-    .background-animation {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #4a148c, #d81b60, #ffca28);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
     }
-    .dot {
-      position: absolute;
-      width: 8px; height: 8px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 50%;
-      animation: floatUp 10s linear infinite;
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+
+    /* Floating dots */
+    .background-animation { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; overflow:hidden; }
+    .dot { position:absolute; width:8px; height:8px; background: rgba(255,255,255,0.8); border-radius:50%; animation: floatUp 10s linear infinite; }
     @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0.5; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      0% { transform: translateY(100vh) scale(0.5); opacity:0.5; }
+      50% { opacity:1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity:0; }
     }
 
     /* Banner */
-    .banner {
-      position: relative;
-      text-align: center;
-      padding: 80px 10px;
-      color: #fff;
-      z-index: 1;
-    }
-    .banner h1 {
-      font-size: 4rem;
-      font-weight: bold;
-      text-shadow: 0 0 15px rgba(255, 140, 0, 0.9);
-    }
-    .banner p {
-      font-size: 1.3rem;
-    }
+    .banner { text-align:center; padding:80px 10px; color:#fff; z-index:1; }
+    .banner h1 { font-size:4rem; font-weight:bold; text-shadow:0 0 15px rgba(255,140,0,0.9); }
+    .banner p { font-size:1.3rem; }
 
     /* Cards */
     .ticket-card {
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+      border-radius:15px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 1;
-      position: relative;
+      text-align:center;
+      padding:2rem;
     }
-    .ticket-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
+    .ticket-card:hover { transform: translateY(-8px); box-shadow:0 12px 25px rgba(0,0,0,0.15); }
+    .card-icon { font-size:2.5rem; margin-bottom:1rem; }
 
     .book-btn {
-      background: linear-gradient(45deg, #ff5722, #ff9800);
-      color: #fff;
-      font-weight: bold;
-      border-radius: 30px;
-      padding: 10px 25px;
-      transition: 0.3s ease;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      color:#fff;
+      font-weight:bold;
+      border:none; border-radius:25px;
+      padding:10px 20px;
+      transition:0.3s;
     }
-    .book-btn:hover {
-      background: linear-gradient(45deg, #e64a19, #f57c00);
-      transform: scale(1.1);
+    .book-btn:hover { background: linear-gradient(90deg, #dd2476, #ff512f); transform: scale(1.05); }
+
+    .social-qr { width:185px; height:210px; object-fit:cover; border-radius:10px; border:3px solid #eee; transition: transform 0.3s ease; }
+    .social-qr:hover { transform: scale(1.05); }
+
+    footer { background:#111; color:#ccc; padding:20px 0; text-align:center; z-index:1; }
+    footer a { color:#ff9800; text-decoration:none; }
+
+    .text-gradient {
+      background: linear-gradient(90deg, #e7e0de, #f1e9ec);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
 
-    footer {
-      background: #111;
-      color: #ccc;
-      padding: 20px 0;
-      z-index: 1;
-      position: relative;
-    }
-    footer a {
-      color: #ff9800;
-      text-decoration: none;
-    }
-	
-	.text-gradient {
-  background: linear-gradient(90deg, #e7e0de, #f1e9ec);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.ticket-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ticket-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.card-icon {
-  font-size: 2.5rem;
-}
-
-.book-btn {
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 20px;
-  transition: 0.3s;
-}
-
-.book-btn:hover {
-  background: linear-gradient(90deg, #dd2476, #ff512f);
-  transform: scale(1.05);
-}
-
-.social-qr {
-  width: 185px;        /* fixed width */
-  height: 210px;       /* fixed height */
-  object-fit: cover;   /* crop/scale evenly */
-  border-radius: 10px;
-  border: 3px solid #eee;
-  transition: transform 0.3s ease;
-}
-
-.social-qr:hover {
-  transform: scale(1.05);
-}
-
-a#instagramLink, a#whatsappLink {
+    a#instagramLink, a#whatsappLink {
   position: relative;
   z-index: 10;
-}
-
+    }
   </style>
 </head>
 <body>
 
-  <!-- Animated background dots -->
-  <div class="background-animation">
-    <!-- Generate multiple dots -->
-    <div class="dot" style="left:10%; animation-duration:12s;"></div>
-    <div class="dot" style="left:20%; animation-duration:15s;"></div>
-    <div class="dot" style="left:35%; animation-duration:18s;"></div>
-    <div class="dot" style="left:50%; animation-duration:14s;"></div>
-    <div class="dot" style="left:65%; animation-duration:20s;"></div>
-    <div class="dot" style="left:80%; animation-duration:16s;"></div>
-    <div class="dot" style="left:90%; animation-duration:19s;"></div>
-  </div>
+<!-- =================== Background Dots =================== -->
+<div class="background-animation">
+  <div class="dot" style="left:10%; animation-duration:12s;"></div>
+  <div class="dot" style="left:20%; animation-duration:15s;"></div>
+  <div class="dot" style="left:35%; animation-duration:18s;"></div>
+  <div class="dot" style="left:50%; animation-duration:14s;"></div>
+  <div class="dot" style="left:65%; animation-duration:20s;"></div>
+  <div class="dot" style="left:80%; animation-duration:16s;"></div>
+  <div class="dot" style="left:90%; animation-duration:19s;"></div>
+</div>
 
-  <!-- Banner -->
-  <section class="banner">
-    <h1 class="animate__animated animate__zoomIn">Dandiya Raasotsav 2025</h1>
-    <p class="animate__animated animate__fadeInUp">Dance • Celebrate • Connect</p>
-    <p class="animate__animated animate__fadeInUp">27th September | 5:30 PM Onwards</p>
-  </section>
+<!-- =================== Banner =================== -->
+<section class="banner">
+  <h1 class="animate__animated animate__zoomIn">Dandiya Raasotsav 2025</h1>
+  <p class="animate__animated animate__fadeInUp">Dance • Celebrate • Connect</p>
+  <p class="animate__animated animate__fadeInUp">27th September | 5:30 PM Onwards</p>
+</section>
 
-  <!-- Event Details -->
- <section class="container">
+<!-- =================== Event Details =================== -->
+<section class="container py-5">
   <div class="row align-items-stretch g-4">
-    <!-- Event Highlights -->
     <div class="col-md-6" data-aos="fade-right">
-      <div class="h-100 p-4 rounded-4 shadow-lg" style="background-color: rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center;">
+      <div class="h-100 p-4 rounded-4 shadow-lg" style="background-color: rgba(255,255,255,0.1);">
         <h2 class="mb-3" style="color: #fff;">Event Highlights</h2>
-        <p style="color: #f0f0f0; font-size: 1.1rem;">
-          💃 Experience electrifying Garba nights with live singers, DJs, food stalls, and competitions. Celebrate the festive spirit of NavRaang like never before!
+        <p style="color:#f0f0f0; font-size:1.1rem;">
+          💃 Electrifying Garba nights with live singers, DJs, food stalls, and competitions.
         </p>
-        <ul style="color: #ffd700; font-size: 1rem;">
+        <ul style="color:#ffd700; font-size:1rem;">
           <li>🎤 Live performers & DJs</li>
           <li>🍴 Multi-cuisine food court</li>
           <li>🏆 Award Ceremony</li>
-		      <li>📸 Photo Booth</li>
-		</ul>
+          <li>📸 Photo Booth</li>
+        </ul>
       </div>
     </div>
-
-    <!-- Venue Map -->
     <div class="col-md-6" data-aos="fade-left">
-      <div class="h-100 p-4 rounded-4 shadow-lg" style="background-color: rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center;">
-        <h4 style="color: #fff;">Venue</h4>
-        <p style="color: #f0f0f0;">Mayfield Ivy Garden & Banquet, Baner, Pune</p>
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.955648702998!2d73.78563037518758!3d18.56390308254369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfd8c71c0a1f%3A0x639a23a40334a568!2sMayfield%20Ivy%20Garden%20%26%20Banquet!5e0!3m2!1sen!2sin!4v1725965230000!5m2!1sen!2sin" 
-          width="100%" 
-          height="250" 
-          style="border:0; border-radius: 15px;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+      <div class="h-100 p-4 rounded-4 shadow-lg" style="background-color: rgba(255,255,255,0.1);">
+        <h4 style="color:#fff;">Venue</h4>
+        <p style="color:#f0f0f0;">Mayfield Ivy Garden & Banquet, Baner, Pune</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.955648702998!2d73.78563037518758!3d18.56390308254369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfd8c71c0a1f%3A0x639a23a40334a568!2sMayfield%20Ivy%20Garden%20%26%20Banquet!5e0!3m2!1sen!2sin!4v1725965230000!5m2!1sen!2sin" width="100%" height="250" style="border:0; border-radius:15px;" allowfullscreen="" loading="lazy"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Booking Modal -->
+<!-- =================== Tickets & Pricing =================== -->
+<section class="container py-5">
+  <h2 class="text-center mb-5 fw-bold text-gradient">🎟️ Tickets & Pricing</h2>
+  <div id="ticketsContainer" class="row g-4 justify-content-center"></div>
+</section>
+
+<!-- =================== Booking Modal =================== -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg"> <!-- larger modal for 2 columns -->
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="bookingModalLabel">Book Your Pass</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-
       <div class="modal-body">
         <form id="bookingForm" novalidate>
           <div class="row g-3">
-            <!-- Full Name -->
             <div class="col-md-6">
               <label class="form-label">Full Name</label>
-              <input type="text" class="form-control" name="name" id="name" 
-                     pattern="[A-Za-z ]+" placeholder="Enter your name" required>
-              <div class="invalid-feedback">
-                Name must contain only letters.
-              </div>
+              <input type="text" class="form-control" id="name" required>
+              <div class="invalid-feedback">Name must contain only letters.</div>
             </div>
-
-            <!-- Email -->
             <div class="col-md-6">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter your email" required>
-              <div class="invalid-feedback">
-                Please enter a valid email address.
-              </div>
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
             </div>
-
-            <!-- Phone -->
             <div class="col-md-6">
-              <label for="phone" class="form-label">Phone</label>
-              <input type="tel" class="form-control" id="phone" name="phone"
-                     pattern="[0-9]{10}" maxlength="10"
-                     placeholder="Enter 10-digit number" required>
-              <div class="invalid-feedback">
-                Please enter a valid 10-digit phone number.
-              </div>
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="phone" maxlength="10" required>
+              <div class="invalid-feedback">Please enter a valid 10-digit number.</div>
             </div>
-
-            <!-- Pass Type -->
             <div class="col-md-6">
               <label class="form-label">Selected Pass</label>
-              <input type="text" class="form-control" id="selectedPass" name="pass_type" readonly>
+              <input type="text" class="form-control" id="selectedPass" readonly>
             </div>
-
-            <!-- Quantity -->
             <div class="col-md-6">
               <label class="form-label">Quantity</label>
-              <input type="number" class="form-control" id="passQuantity" name="quantity" min="1" value="1" required>
+              <input type="number" class="form-control" id="passQuantity" min="1" value="1" required>
             </div>
-
-            <!-- Total Amount -->
             <div class="col-md-6">
               <label class="form-label">Total Amount</label>
               <input type="text" class="form-control" id="totalAmount" readonly>
             </div>
           </div>
-
-          <!-- Footer -->
           <div class="modal-footer border-0">
-            <button type="button"
-                    id="proceedBtn"
-                    onclick="proceedToPayment()"
-                    class="btn book-btn w-100 text-white text-decoration-none disabled">
-              Proceed to Booking
-            </button>
+            <button type="submit" class="btn book-btn w-100" id="proceedBtn" disabled>Proceed to Booking</button>
           </div>
         </form>
       </div>
@@ -303,67 +182,7 @@ a#instagramLink, a#whatsappLink {
   </div>
 </div>
 
-
-
-
-<section class="container py-5">
-  <h2 class="text-center mb-5 fw-bold text-gradient">🎟️ Tickets & Pricing</h2>
-
-  <!-- First row (2 cards) -->
-  <div class="row g-4 justify-content-center">
-    <div class="col-md-6 col-lg-5">
-      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-        <div class="card-icon mb-3">👦</div>
-        <h5 class="fw-bold">Kids Entry</h5>
-        <p class="fs-4 text-success">₹399</p>
-        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Kids Entry - ₹399">Book Now</button>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-5">
-      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-        <div class="card-icon mb-3">🙋</div>
-        <h5 class="fw-bold">Regular Ticket</h5>
-        <p class="fs-4 text-primary">₹499</p>
-        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Regular Ticket - ₹499">Book Now</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Second row (3 cards) -->
-  <div class="row g-4 justify-content-center mt-3">
-    <div class="col-md-6 col-lg-4">
-      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-        <div class="card-icon mb-3">💑</div>
-        <h5 class="fw-bold">Couple Pass</h5>
-        <p class="fs-4 text-danger">₹899</p>
-        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Couple Pass - ₹899">Book Now</button>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-4">
-      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-        <div class="card-icon mb-3">👨‍👩‍👧‍👦</div>
-        <h5 class="fw-bold">Group of 3 Pass</h5>
-        <p class="fs-4 text-warning">₹1399</p>
-        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Group of 3 Pass - ₹1399">Book Now</button>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-lg-4">
-      <div class="card ticket-card text-center p-4 shadow-lg border-0 rounded-4">
-        <div class="card-icon mb-3">👨‍👩‍👧‍👦</div>
-        <h5 class="fw-bold">Group of 5 Pass</h5>
-        <p class="fs-4 text-warning">₹2199</p>
-        <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="Group of 5 Pass - ₹2199">Book Now</button>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-  
-
+<!-- =================== Social Links =================== -->
   <!-- Social Links -->
   <section class="social-section text-center my-5">
     <h4 class="fw-bold text-gradient">📲 Connect with Us</h4>
@@ -371,7 +190,7 @@ a#instagramLink, a#whatsappLink {
 
       <div class="text-center">
         <!-- WhatsApp -->
-        <a href="https://api.whatsapp.com/send?phone=917058746046&text=Hi%20I%20want%20to%20book%20tickets%20for%20Dandiya!" 
+        <a href="https://api.whatsapp.com/send?phone=7058746046&text=Hi%20I%20want%20to%20book%20tickets%20for%20Dandiya!" 
            target="_blank" style="text-decoration:none; color:#eae1e4;" id="whatsappLink">
           <img src="./assets/WhatsApp.jpeg" alt="WhatsApp QR" class="social-qr"><br>
           WhatsApp
@@ -389,376 +208,215 @@ a#instagramLink, a#whatsappLink {
     
     </div>
   </section>
-  
-  
-  
-    <!-- FAQ & Contact -->
-<section class="container py-5">
-  <h2 class="text-center mb-5 bold text-gradient" data-aos="fade-up">❓ FAQ & 📞 Contact</h2>
 
-  <div class="row justify-content-center align-items-start mb-4 bold text-gradient" data-aos="fade-up">
-    <!-- Left Column -->
+<!-- =================== FAQ & Contact =================== -->
+<section class="container py-5">
+  <h2 class="text-center mb-5 fw-bold text-gradient">❓ FAQ & 📞 Contact</h2>
+  <div class="row justify-content-center align-items-start mb-4">
     <div class="col-md-5 text-md-end text-center mb-3 mb-md-0 pe-md-4 border-end">
       <p><strong>👗 Dress Code:</strong> Traditional preferred</p>
       <p><strong>👶 Kids Entry:</strong> Free below 6 years</p>
     </div>
-
-    <!-- Right Column -->
     <div class="col-md-5 text-md-start text-center ps-md-4">
       <p><strong>❌ Refund Policy:</strong> Tickets non-refundable</p>
       <p><strong>📞 Contact:</strong> +91 7058746046 | divineeventsandco@gmail.com</p>
     </div>
   </div>
-
 </section>
 
-  <!-- Footer -->
-  <footer class="text-center">
-    <p>© 2025 Dandiya Raasotsav | Made with ❤️</p>
-  </footer>
+<!-- =================== Footer =================== -->
+<footer>
+  <p>© 2025 Dandiya Raasotsav | Made with ❤️</p>
+</footer>
 
-  <script>
+<!-- =================== JS Libraries =================== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 900 });
+</script>
 
-  document.getElementById("whatsappLink").addEventListener("click", function(event) {
-    event.preventDefault(); // stop default link behavior
-    const url = this.getAttribute("href"); // get href
-    console.log("Opening WhatsApp link:", url);
-    window.open(url, "_blank"); // open in new tab/window
-  });
+<!-- =================== Tickets Loader & Modal Logic =================== -->
+<script>
+(async function() {
+  // ----- Elements -----
+  const ticketsContainer = document.getElementById("ticketsContainer");
+  const bookingModalEl = document.getElementById("bookingModal");
+  const bookingForm = document.getElementById("bookingForm");
+  const selectedPassInput = document.getElementById("selectedPass");
+  const passQuantityInput = document.getElementById("passQuantity");
+  const totalAmountInput = document.getElementById("totalAmount");
+  const proceedBtn = document.getElementById("proceedBtn");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  
+  let selectedPrice = 0;
 
-    function proceedToPayment() {
-      // Collect form values
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const passType = document.getElementById("selectedPass").value;
-      const quantity = document.getElementById("passQuantity").value;
-      const total = document.getElementById("totalAmount").value;
-    
-      // If form invalid, block
-      const form = document.getElementById("bookingForm");
-      
-      if (!form.checkValidity()) {
-        form.reportValidity(); // Show validation messages
-        return;
-      }
-      
-        // ✅ If valid: close modal
-  const bookingModalEl = document.getElementById('bookingModal');
-  const bookingModal = bootstrap.Modal.getInstance(bookingModalEl) 
-                        || new bootstrap.Modal(bookingModalEl);
-  bookingModal.hide();
+  // ----- Load Tickets from API -----
+  async function loadTickets() {
+    try {
+      const res = await fetch("https://whatsapp-booking-bot-by57.onrender.com/api/passes");
+      const data = (await res.json()).data;
+      ticketsContainer.innerHTML = "";
 
-  // ✅ Reset form after modal closes
-  bookingModalEl.addEventListener('hidden.bs.modal', function () {
-    form.reset();
-    document.getElementById("proceedBtn").classList.add('disabled'); // if you’re disabling it
-  }, { once: true }); // once → only runs one time
+      const iconMap = { "KIDS":"👦","REGULAR":"🙋","COUPLE":"💑","GROUP OF 3":"👨‍👩‍👧","GROUP OF 5":"👨‍👩‍👧‍👦" };
 
-
-    
-      // WhatsApp number
-      const phoneNumber = "917058746046";
-    
-      // Message template
-      const message = `Name: ${name} \nEmail: ${email} \nPhone: ${phone} \nPass: ${passType} \nQuantity: ${quantity} \nTotal: ₹${total}`;
-    
-      // Open WhatsApp with filled message
-      const url = `https://wa.me/${phoneNumber}?text=${message}`;
-      window.open(url, "_blank");
-    }
-
-    document.getElementById('name').addEventListener('input', function () {
-      // Replace anything that's NOT a-z or space
-      this.value = this.value.replace(/[^A-Za-z ]/g, '');
-    });
-
-    
-  const phoneInput = document.getElementById('phone');
-
-  // Allow only numbers (block letters/symbols)
-  phoneInput.addEventListener('input', () => {
-    phoneInput.value = phoneInput.value.replace(/[^0-9]/g, ''); // remove non-numbers
-  });
-
-  // Validate on blur or while typing
-  phoneInput.addEventListener('blur', validatePhone);
-  phoneInput.addEventListener('keyup', validatePhone);
-
-  function validatePhone() {
-    const phone = phoneInput.value.trim();
-    if (/^[0-9]{10}$/.test(phone)) {
-      phoneInput.classList.remove('is-invalid');
-      phoneInput.classList.add('is-valid');
-    } else {
-      phoneInput.classList.remove('is-valid');
-      phoneInput.classList.add('is-invalid');
-    }
+      data.forEach(ticket => {
+        const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
+        const card = `
+          <div class="col-md-6 col-lg-4">
+            <div class="card ticket-card">
+              <div class="card-icon">${icon}</div>
+              <h5 class="fw-bold">${ticket.description}</h5>
+              <p class="fs-4 text-primary">₹${ticket.price}</p>
+              <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
+            </div>
+          </div>`;
+        ticketsContainer.insertAdjacentHTML("beforeend", card);
+      });
+    } catch(e) { console.error(e); }
   }
+  document.addEventListener("DOMContentLoaded", loadTickets);
+
+  // ----- Modal logic -----
+  bookingModalEl.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget;
+    const ticketText = button.getAttribute('data-ticket');
+    selectedPassInput.value = ticketText;
+    const match = ticketText.match(/₹(\d+)/);
+    selectedPrice = match ? parseInt(match[1]) : 0;
+    passQuantityInput.value = 1;
+    totalAmountInput.value = '₹' + selectedPrice;
+    proceedBtn.disabled = true;
+  });
+
+  passQuantityInput.addEventListener('input', () => {
+    let qty = Math.max(1, parseInt(passQuantityInput.value)||1);
+    passQuantityInput.value = qty;
+    totalAmountInput.value = '₹' + (selectedPrice * qty);
+  });
+
+  // ----- Modal Form validation & WhatsApp submit -----
 
 
-    // Disable/Enable button based on form validity
-    const form = document.getElementById('bookingForm');
-    const proceedBtn = document.getElementById('proceedBtn');
-    
-    form.addEventListener('input', () => {
-      if (form.checkValidity()) {
-        proceedBtn.classList.remove('disabled');
-      } else {
-        proceedBtn.classList.add('disabled');
-      }
-    });
-    
-    // Reset form when modal closes
-    document.getElementById('bookingModal').addEventListener('hidden.bs.modal', function () {
-      form.reset();
-      proceedBtn.classList.add('disabled');
-    });
+// Name Validation (letters only)
+const modalNameInput = document.getElementById('name');
+modalNameInput.addEventListener('input', function () {
+  this.value = this.value.replace(/[^A-Za-z ]/g, '');
+});
+modalNameInput.addEventListener('blur', validateNameModal);
+modalNameInput.addEventListener('keyup', validateNameModal);
 
-    const bookingModal = document.getElementById('bookingModal');
-    const ticketInput = document.getElementById("selectedPass");
-    bookingModal.addEventListener('show.bs.modal', event => {
-      const button = event.relatedTarget;
-      const ticket = button.getAttribute('data-ticket');
-      const ticketInput = bookingModal.querySelector('#ticketType');
-      ticketInput.value = ticket;
-    });
-
-    // WhatsApp redirect after form submit
-    document.getElementById('bookingForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const ticket = document.getElementById('ticketType').value;
-      const name = document.getElementById('userName').value;
-      const email = document.getElementById('userEmail').value;
-      const phone = document.getElementById('userPhone').value;
-      const pass = document.getElementById('selectedPass').value;
-      const quantity = document.getElementById('passQuantity').value;
-      const amount = document.getElementById('totalAmount').value;
-	  
-  	  const newMeesage = `Name: ${name} \nPhone: ${phone} \nEmail: ${email} \n\Pass: ${pass}\nQuantity: ${quantity}\nAmount: ${amount} `;
-      const message = `🎟️ Ticket Booking Request\n\nTicket: ${ticket}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-      const url = `https://wa.me/message/G2725CU5Q47CB1?text=${encodeURIComponent(newMeesage)}`;
-
-      window.open(url, '_blank');
-      bookingModal.querySelector('form').reset();
-      const modal = bootstrap.Modal.getInstance(bookingModal);
-      modal.hide();
-    });
-  </script>
-
-
-
-
-  <!-- Bootstrap JS + AOS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 900 });
-  </script>
-
-  <!-- ---------- App JS (single block, error-free) ---------- -->
-  <script>
-  (function () {
-    // Elements
-    const bookButtons = document.querySelectorAll('.book-btn');
-    const bookingModalEl = document.getElementById('bookingModal');
-    const bookingForm = document.getElementById('bookingForm');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const selectedPassInput = document.getElementById('selectedPass');
-    const passQuantityInput = document.getElementById('passQuantity');
-    const totalAmountInput = document.getElementById('totalAmount');
-    const submitBtn = document.getElementById('submitBtn');
-
-    let selectedPrice = 0; // numeric
-
-    // Helper: safely parse int
-    function toInt(v) {
-      const n = parseInt(String(v).replace(/[^0-9]/g, ''), 10);
-      return Number.isFinite(n) ? n : 0;
-    }
-
-    // Prevent typing numbers/symbols in name
-    if (nameInput) {
-      nameInput.addEventListener('input', function () {
-        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
-      });
-    }
-
-    // Attach click to each Book Now button — populate modal and show it
-    if (bookButtons && bookButtons.length) {
-      const bsModal = new bootstrap.Modal(bookingModalEl, { backdrop: true });
-      bookButtons.forEach(btn => {
-        btn.addEventListener('click', function (e) {
-          const passName = btn.getAttribute('data-pass') || btn.closest('.ticket-card')?.querySelector('h5')?.innerText || 'Pass';
-          const price = toInt(btn.getAttribute('data-price') || btn.closest('.ticket-card')?.querySelector('.fs-4')?.innerText || 0);
-          selectedPrice = price;
-
-          // set modal fields
-          if (selectedPassInput) selectedPassInput.value = passName + ' - ₹' + price;
-          if (passQuantityInput) passQuantityInput.value = 1;
-          if (totalAmountInput) totalAmountInput.value = '₹' + (price * 1);
-
-          // reset form validity states
-          if (bookingForm) {
-            bookingForm.classList.remove('was-validated');
-            bookingForm.reset(); // keep it simple — we set selected values below
-            // reassign fields we need (reset overwrote selectedPass & totals)
-            if (selectedPassInput) selectedPassInput.value = passName + ' - ₹' + price;
-            if (passQuantityInput) passQuantityInput.value = 1;
-            if (totalAmountInput) totalAmountInput.value = '₹' + (price * 1);
-          }
-
-          // ensure submit button disabled until fields valid
-          if (submitBtn) submitBtn.disabled = true;
-
-          // show modal
-          bsModal.show();
-        });
-      });
-    }
-
-    // Update total when quantity changes
-    if (passQuantityInput) {
-      passQuantityInput.addEventListener('input', function () {
-        const qty = Math.max(1, toInt(this.value) || 1);
-        this.value = qty; // keep min 1
-        if (totalAmountInput) totalAmountInput.value = '₹' + (selectedPrice * qty);
-      });
-    }
-
-    // Form validation: live check, enable submit only when valid
-    function checkFormAndToggleSubmit() {
-      if (!bookingForm) return;
-      // Use browser validation + additional checks (phone 10 digits)
-      const formValid = bookingForm.checkValidity();
-      const phoneValid = /^[0-9]{10}$/.test((phoneInput?.value || '').trim());
-      const nameValid = /^[A-Za-z\s]+$/.test((nameInput?.value || '').trim()) && (nameInput?.value || '').trim().length > 0;
-
-      if (formValid && phoneValid && nameValid) {
-        submitBtn.disabled = false;
-      } else {
-        submitBtn.disabled = true;
-      }
-    }
-
-    if (bookingForm) {
-      bookingForm.addEventListener('input', function () {
-        // remove "was-validated" until submit attempt
-        bookingForm.classList.remove('was-validated');
-        checkFormAndToggleSubmit();
-      });
-
-      // Submit handler: open WhatsApp with booking details
-      bookingForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // mark validation UI
-        bookingForm.classList.add('was-validated');
-
-        // final validation guard
-        if (!(bookingForm.checkValidity() && /^[0-9]{10}$/.test((phoneInput?.value || '').trim()) && /^[A-Za-z\s]+$/.test((nameInput?.value || '').trim()))) {
-          checkFormAndToggleSubmit();
-          return;
-        }
-
-        const passType = selectedPassInput?.value || '';
-        const qty = passQuantityInput?.value || '1';
-        const total = totalAmountInput?.value || '';
-        const name = (nameInput?.value || '').trim();
-        const email = (emailInput?.value || '').trim();
-        const phone = (phoneInput?.value || '').trim();
-
-        const message =
-          `🎟️ Ticket Booking Request\n\nPass: ${passType}\nQuantity: ${qty}\nTotal: ${total}\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
-
-        // WhatsApp number — update if you need other flow (payment first etc.)
-        const whatsappNumber = '917058746046';
-        const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-        // open WhatsApp in new tab
-        window.open(waUrl, '_blank');
-
-        // hide modal & reset
-        const modalInstance = bootstrap.Modal.getInstance(bookingModalEl);
-        if (modalInstance) modalInstance.hide();
-
-        // reset internal state after a short delay (allow modal hide)
-        setTimeout(() => {
-          bookingForm.reset();
-          if (selectedPassInput) selectedPassInput.value = '';
-          if (totalAmountInput) totalAmountInput.value = '';
-          selectedPrice = 0;
-          if (submitBtn) submitBtn.disabled = true;
-        }, 300);
-      });
-    }
-
-    // Reset when modal closes (covers manual close via X or backdrop)
-    if (bookingModalEl) {
-      bookingModalEl.addEventListener('hidden.bs.modal', function () {
-        if (bookingForm) {
-          bookingForm.reset();
-          bookingForm.classList.remove('was-validated');
-        }
-        if (selectedPassInput) selectedPassInput.value = '';
-        if (totalAmountInput) totalAmountInput.value = '';
-        selectedPrice = 0;
-        if (submitBtn) submitBtn.disabled = true;
-      });
-    }
-
-    // Safety: initial check disable submit
-    if (submitBtn) submitBtn.disabled = true;
-
-  })();
-
-// </ -------------------------- Name Vaildation ---------------------------/>
-
-
-  const nameInput = document.getElementById('name');
-
-// Validate on blur or while typing
-nameInput.addEventListener('blur', validateName);
-nameInput.addEventListener('keyup', validateName);
-
-function validateName() {
-  const name = nameInput.value.trim();
-
-  // Regex: only letters and spaces, at least 2 characters
-  const namePattern = /^[A-Za-z ]{2,}$/;
-
-  if (namePattern.test(name)) {
-    nameInput.classList.remove('is-invalid');
-    nameInput.classList.add('is-valid');
+function validateNameModal() {
+  const name = modalNameInput.value.trim();
+  if (/^[A-Za-z ]{2,}$/.test(name)) {
+    modalNameInput.classList.remove('is-invalid');
+    modalNameInput.classList.add('is-valid');
   } else {
-    nameInput.classList.remove('is-valid');
-    nameInput.classList.add('is-invalid');
+    modalNameInput.classList.remove('is-valid');
+    modalNameInput.classList.add('is-invalid');
   }
 }
 
-// </ -------------------------- Email Vaildation ---------------------------/>
+// Email Validation (pattern)
+const modalEmailInput = document.getElementById('email');
+modalEmailInput.addEventListener('blur', validateEmailModal);
+modalEmailInput.addEventListener('keyup', validateEmailModal);
 
-const emailInput = document.getElementById('email');
-
-// Validate on blur or while typing
-emailInput.addEventListener('blur', validateEmail);
-emailInput.addEventListener('keyup', validateEmail);
-
-function validateEmail() {
-  const email = emailInput.value.trim();
-
-  // Simple regex for email validation
-  const emailPattern = /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
-
-  if (emailPattern.test(email)) {
-    emailInput.classList.remove('is-invalid');
-    emailInput.classList.add('is-valid');
+function validateEmailModal() {
+  const email = modalEmailInput.value.trim();
+  const pattern = /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+  if (pattern.test(email)) {
+    modalEmailInput.classList.remove('is-invalid');
+    modalEmailInput.classList.add('is-valid');
   } else {
-    emailInput.classList.remove('is-valid');
-    emailInput.classList.add('is-invalid');
+    modalEmailInput.classList.remove('is-valid');
+    modalEmailInput.classList.add('is-invalid');
   }
 }
+
+// Phone Validation (10-digit number)
+const modalPhoneInput = document.getElementById('phone');
+modalPhoneInput.addEventListener('input', function () {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+modalPhoneInput.addEventListener('blur', validatePhoneModal);
+modalPhoneInput.addEventListener('keyup', validatePhoneModal);
+
+function validatePhoneModal() {
+  const phone = modalPhoneInput.value.trim();
+  if (/^[0-9]{10}$/.test(phone)) {
+    modalPhoneInput.classList.remove('is-invalid');
+    modalPhoneInput.classList.add('is-valid');
+  } else {
+    modalPhoneInput.classList.remove('is-valid');
+    modalPhoneInput.classList.add('is-invalid');
+  }
+}
+
+// Enable Proceed button only if all valid
+bookingForm.addEventListener('input', function () {
+  if (
+    /^[A-Za-z ]{2,}$/.test(modalNameInput.value.trim()) &&
+    /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(modalEmailInput.value.trim()) &&
+    /^[0-9]{10}$/.test(modalPhoneInput.value.trim())
+  ) {
+    proceedBtn.classList.remove('disabled');
+  } else {
+    proceedBtn.classList.add('disabled');
+  }
+});
+
+// ----------------------- whatsapp submit -----------------------------------
+
+  function checkFormValidity() {
+    const formValid = bookingForm.checkValidity();
+    const phoneValid = /^[0-9]{10}$/.test(phoneInput.value.trim());
+    const nameValid = /^[A-Za-z ]{2,}$/.test(nameInput.value.trim());
+    proceedBtn.disabled = !(formValid && phoneValid && nameValid);
+  }
+
+  bookingForm.addEventListener('input', checkFormValidity);
+
+  bookingForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (proceedBtn.disabled) return;
+     const message = `Ticket Booking Request: \nName: ${nameInput.value}\nEmail: ${emailInput.value}\nPhone: ${phoneInput.value}\nPass: ${selectedPassInput.value}\nQuantity: ${passQuantityInput.value}\nTotal: ${totalAmountInput.value}`;
+    // const newMeesage = `Name: ${name} \nPhone: ${phone} \nEmail: ${email} \n\Pass: ${pass}\nQuantity: ${quantity}\nAmount: ${amount} `;
+    window.open(`https://wa.me/918446662683?text=${encodeURIComponent(message)}`, '_blank');
+    bootstrap.Modal.getInstance(bookingModalEl).hide();
+    setTimeout(() => bookingForm.reset(), 300);
+  });
+})();
+
+
+
+
+// reset modal form
+
+
+const bookingModalEl = document.getElementById('bookingModal');
+bookingModalEl.addEventListener('hidden.bs.modal', function () {
+  // Reset all inputs
+  bookingForm.reset();
+
+  // Clear validation classes
+  modalNameInput.classList.remove('is-valid', 'is-invalid');
+  modalEmailInput.classList.remove('is-valid', 'is-invalid');
+  modalPhoneInput.classList.remove('is-valid', 'is-invalid');
+
+  // Clear selected pass and total
+  selectedPassInput.value = '';
+  totalAmountInput.value = '';
+  passQuantityInput.value = 1;
+
+  // Disable proceed button
+  proceedBtn.classList.add('disabled');
+
+  // Reset selectedPrice
+  selectedPrice = 0;
+});
 
 </script>
 </body>
