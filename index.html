@@ -401,93 +401,93 @@
 
   // ----- Load Tickets from API -----
 
-//   async function loadTickets() {
-//   try {
-//     // Hardcoded ticket data instead of fetching from API
-//     const data = [
-//       {
-//         name: "Kids",
-//         description: "Kids Pass (Under 6 years)",
-//         price: 399
-//       },
-//       {
-//         name: "Regular",
-//         description: "Single Entry Pass",
-//         price: 499
-//       },
-//       {
-//         name: "Couple",
-//         description: "Couple Pass (For 2 People)",
-//         price: 899
-//       },
-//       {
-//         name: "Group of 3",
-//         description: "Group Pass (3 People)",
-//         price: 1399
-//       },
-//       {
-//         name: "Group of 5",
-//         description: "Group Pass (5 People)",
-//         price: 2199
-//       }
-//     ];
-
-//     ticketsContainer.innerHTML = "";
-
-//     const iconMap = {
-//       "KIDS": "👦",
-//       "REGULAR": "🙋",
-//       "COUPLE": "💑",
-//       "GROUP OF 3": "👨‍👩‍👧",
-//       "GROUP OF 5": "👨‍👩‍👧‍👦"
-//     };
-
-//     data.forEach(ticket => {
-//       const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
-//       const card = `
-//         <div class="col-md-6 col-lg-4">
-//           <div class="card ticket-card">
-//             <div class="card-icon">${icon}</div>
-//             <h5 class="fw-bold">${ticket.description}</h5>
-//             <p class="fs-4 text-primary">₹${ticket.price}</p>
-//             <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
-//           </div>
-//         </div>`;
-//       ticketsContainer.insertAdjacentHTML("beforeend", card);
-//     });
-//   } catch (e) {
-//     console.error(e);
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", loadTickets);
-
-
-
   async function loadTickets() {
-    try {
-      const res = await fetch("https://whatsapp-booking-bot-by57.onrender.com/api/passes");
-      const data = (await res.json()).data;
-      ticketsContainer.innerHTML = "";
+  try {
+    // Hardcoded ticket data instead of fetching from API
+    const data = [
+      {
+        name: "Kids",
+        description: "Kids Pass (Under 6 years)",
+        price: 399
+      },
+      {
+        name: "Regular",
+        description: "Single Entry Pass",
+        price: 499
+      },
+      {
+        name: "Couple",
+        description: "Couple Pass (For 2 People)",
+        price: 899
+      },
+      {
+        name: "Group of 3",
+        description: "Group Pass (3 People)",
+        price: 1399
+      },
+      {
+        name: "Group of 5",
+        description: "Group Pass (5 People)",
+        price: 2199
+      }
+    ];
 
-      const iconMap = { "KIDS":"👦","REGULAR":"🙋","COUPLE":"💑","GROUP OF 3":"👨‍👩‍👧","GROUP OF 5":"👨‍👩‍👧‍👦" };
+    ticketsContainer.innerHTML = "";
 
-      data.forEach(ticket => {
-        const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
-        const card = `
-          <div class="col-md-6 col-lg-4">
-            <div class="card ticket-card">
-              <div class="card-icon">${icon}</div>
-              <h5 class="fw-bold">${ticket.description}</h5>
-              <p class="fs-4 text-primary">₹${ticket.price}</p>
-              <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
-            </div>
-          </div>`;
-        ticketsContainer.insertAdjacentHTML("beforeend", card);
-      });
-    } catch(e) { console.error(e); }
+    const iconMap = {
+      "KIDS": "👦",
+      "REGULAR": "🙋",
+      "COUPLE": "💑",
+      "GROUP OF 3": "👨‍👩‍👧",
+      "GROUP OF 5": "👨‍👩‍👧‍👦"
+    };
+
+    data.forEach(ticket => {
+      const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
+      const card = `
+        <div class="col-md-6 col-lg-4">
+          <div class="card ticket-card">
+            <div class="card-icon">${icon}</div>
+            <h5 class="fw-bold">${ticket.description}</h5>
+            <p class="fs-4 text-primary">₹${ticket.price}</p>
+            <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
+          </div>
+        </div>`;
+      ticketsContainer.insertAdjacentHTML("beforeend", card);
+    });
+  } catch (e) {
+    console.error(e);
   }
-  document.addEventListener("DOMContentLoaded", loadTickets);
+}
+
+document.addEventListener("DOMContentLoaded", loadTickets);
+
+
+
+  // async function loadTickets() {
+  //   try {
+  //     const res = await fetch("https://whatsapp-booking-bot-by57.onrender.com/api/passes");
+  //     const data = (await res.json()).data;
+  //     ticketsContainer.innerHTML = "";
+
+  //     const iconMap = { "KIDS":"👦","REGULAR":"🙋","COUPLE":"💑","GROUP OF 3":"👨‍👩‍👧","GROUP OF 5":"👨‍👩‍👧‍👦" };
+
+  //     data.forEach(ticket => {
+  //       const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
+  //       const card = `
+  //         <div class="col-md-6 col-lg-4">
+  //           <div class="card ticket-card">
+  //             <div class="card-icon">${icon}</div>
+  //             <h5 class="fw-bold">${ticket.description}</h5>
+  //             <p class="fs-4 text-primary">₹${ticket.price}</p>
+  //             <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
+  //           </div>
+  //         </div>`;
+  //       ticketsContainer.insertAdjacentHTML("beforeend", card);
+  //     });
+  //   } catch(e) { console.error(e); }
+  // }
+  // document.addEventListener("DOMContentLoaded", loadTickets);
 
   // ----- Modal logic -----
   
