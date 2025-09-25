@@ -115,6 +115,22 @@
         text-transform: uppercase;
 }
 
+#countdown div {
+  background: rgba(0,0,0,0.6);
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  min-width: 100px;
+}
+
+#countdown span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 5px;
+  color: #ffd700;
+}
+
 </style>
 </head>
 <body>
@@ -129,6 +145,13 @@
   <div class="dot" style="left:80%; animation-duration:16s;"></div>
   <div class="dot" style="left:90%; animation-duration:19s;"></div>
 </div>
+
+<!-- =================== Early Bird Countdown =================== -->
+<section class="container text-center my-5">
+  <h2 class="fw-bold text-boldness text-gradient">⏳ Early Bird Offer Ends In</h2>
+  <div id="countdown" class="d-flex justify-content-center gap-4 mt-4 fs-2 fw-bold text-white"></div>
+  <p class="mt-3 text-warning fw-semibold">Hurry! Book your passes now at discounted prices.</p>
+</section>
 
 <!-- =================== Banner =================== -->
 <section class="banner">
@@ -275,11 +298,6 @@
               <div class="invalid-feedback">Name must contain only letters.</div>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" required>
-              <div class="invalid-feedback">Please enter a valid email address.</div>
-            </div>
-            <div class="col-md-6">
               <label class="form-label">Phone</label>
               <input type="tel" class="form-control" id="phone" maxlength="10" required>
               <div class="invalid-feedback">Please enter a valid 10-digit number.</div>
@@ -404,33 +422,111 @@
   async function loadTickets() {
   try {
     // Hardcoded ticket data instead of fetching from API
-    const data = [
+    const data1 = [
       {
         name: "Kids",
         description: "Kids Pass (Under 6-12 years)",
-        price: 299
+        price: 399
       },
       {
         name: "Regular",
         description: "Single Entry Pass",
-        price: 399
+        price: 499
       },
       {
         name: "Couple",
         description: "Couple Pass (For 2 People)",
-        price: 699
+        price: 899
       },
       {
         name: "Group of 3",
         description: "Group Pass (3 People)",
-        price: 999
+        price: 1599
       },
       {
         name: "Group of 5",
         description: "Group Pass (5 People)",
-        price: 1599
+        price: 2199
       }
     ];
+    
+
+    const data  = [
+  {
+    "_id": "68cd0001a5e99fe27b114d916",
+    "title": "KIDS",
+    "description": "Kids Pass (Under 6-12 years)",
+    "basePrice": 149,
+    "active": true,
+    "allowedEntries": 1,
+    "createdBy": "68cbcdae5e99fe27b114d8fe",
+    "discountHistory": [],
+    "createdAt": "2025-09-20T10:00:00.000Z",
+    "updatedAt": "2025-09-20T10:00:00.000Z",
+    "__v": 0
+  },
+  {
+    "_id": "68cd0002a5e99fe27b114d916",
+    "title": "REGULAR",
+    "description": "Single Entry Pass",
+    "basePrice": 499,
+    "active": true,
+    "allowedEntries": 1,
+    "createdBy": "68cbcdae5e99fe27b114d8fe",
+    "discountHistory": [
+      {
+        "type": "FIXED",
+        "value": 50,
+        "effectiveDate": "2025-09-20T00:00:00.000Z",
+        "note": "early bird ₹50 off",
+        "changedBy": "68cbcdae5e99fe27b114d8fe",
+        "_id": "68cd0101a5e99fe27b114d920",
+        "createdAt": "2025-09-20T10:05:00.000Z"
+      }
+    ],
+    "createdAt": "2025-09-20T10:00:00.000Z",
+    "updatedAt": "2025-09-20T10:05:00.000Z",
+    "__v": 1
+  },
+ 
+];
+function calculateCurrentPrices(passes) {
+  const now = new Date();
+
+  return passes.map(pass => {
+    let currentPrice = pass.basePrice;
+    let currentDiscount = '';
+
+    if (pass.discountHistory && pass.discountHistory.length > 0) {
+      // Sort discounts by effectiveDate (latest first)
+      const validDiscounts = pass.discountHistory
+        .filter(d => new Date(d.effectiveDate) <= now)
+        .sort((a, b) => new Date(b.effectiveDate) - new Date(a.effectiveDate));
+
+        console.log(validDiscounts);
+      if (validDiscounts.length > 0) {
+        const latestDiscount = validDiscounts[0];
+        currentDiscount = latestDiscount.note;
+
+        if (latestDiscount.type === "FIXED") {
+          currentPrice = Math.max(0, pass.basePrice - latestDiscount.value);
+        }
+        if (latestDiscount.type === "PERCENT") {
+          currentPrice = Math.max(0, pass.basePrice - (pass.basePrice * latestDiscount.value) / 100);
+        }
+      }
+    }
+
+    return {
+      ...pass,
+      currentPrice, currentDiscount
+    };
+  });
+}
+
+const passes = calculateCurrentPrices(data);
+    
+console.log(passes)
 
     ticketsContainer.innerHTML = "";
 
@@ -442,15 +538,25 @@
       "GROUP OF 5": "👨‍👩‍👧‍👦"
     };
 
-    data.forEach(ticket => {
-      const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
+    passes.forEach(ticket => {
+      const icon = iconMap[ticket.title.toUpperCase()] || "🎟️";
       const card = `
         <div class="col-md-6 col-lg-4">
           <div class="card ticket-card">
             <div class="card-icon">${icon}</div>
             <h5 class="fw-bold">${ticket.description}</h5>
-            <p class="fs-4 text-primary">₹${ticket.price}</p>
-            <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
+            <!-- Discount / Base Price Line -->
+            <p class="small text-muted mb-1" style="min-height: 1.25rem;">
+              ${ticket.currentDiscount ? `
+                <span class="text-decoration-line-through me-2">₹${ticket.basePrice}</span>
+                <span class="text-success">${ticket.currentDiscount}</span>
+              ` : ''}
+            </p>
+
+            <!-- Current Price (always visible) -->
+            <p class="fs-4 text-primary mb-0 fw-bold">₹${ticket.currentPrice}</p>
+
+            <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.title} - ₹${ticket.basePrice} ₹${ticket.currentPrice}">Book Now</button>
           </div>
         </div>`;
       ticketsContainer.insertAdjacentHTML("beforeend", card);
@@ -462,32 +568,99 @@
 
 document.addEventListener("DOMContentLoaded", loadTickets);
 
+    async function capitalizeFirstLetter(str) {
+        if (!str) return "";
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  async function loadTickets() {
+    try {
+        ticketsContainer.innerHTML = `
+  <div class="d-flex justify-content-center align-items-center my-3">
+    <div class="spinner-border text-primary me-2" role="status" style="width: 1.5rem; height: 1.5rem;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span class="text-muted">Passes are loading...</span>
+  </div>
+`;
+      const res = await fetch("https://whatsapp-booking-bot-by57.onrender.com/api/passes");
+
+        const data = (await res.json());
+        data.sort((a, b) => a.basePrice - b.basePrice);
+
+        const now = new Date();
+
+        ticketsContainer.innerHTML = "";
+
+      const passes = data.map(pass => {
+            let currentPrice = pass.basePrice;
+            let currentDiscount = '';
+
+            if (pass.discountHistory && pass.discountHistory.length > 0) {
+                // Sort discounts by effectiveDate (latest first)
+                const validDiscounts = pass.discountHistory
+                    .filter(d => new Date(d.effectiveDate) <= now)
+                    .sort((a, b) => new Date(b.effectiveDate) - new Date(a.effectiveDate));
+
+                console.log(validDiscounts);
+                if (validDiscounts.length > 0) {
+                    const latestDiscount = validDiscounts[0];
+                    currentDiscount = !latestDiscount.note ? "" : latestDiscount.note.charAt(0).toUpperCase() + latestDiscount.note.slice(1);
+
+                    if (latestDiscount.type === "FIXED") {
+                        currentPrice = Math.max(0, pass.basePrice - latestDiscount.value);
+                    }
+                    if (latestDiscount.type === "PERCENT") {
+                        currentPrice = Math.max(0, pass.basePrice - (pass.basePrice * latestDiscount.value) / 100);
+                    }
+                }
+            }
+
+            return {
+                ...pass,
+                currentPrice, currentDiscount
+            };
+        });
 
 
-  // async function loadTickets() {
-  //   try {
-  //     const res = await fetch("https://whatsapp-booking-bot-by57.onrender.com/api/passes");
-  //     const data = (await res.json()).data;
-  //     ticketsContainer.innerHTML = "";
+        const iconMap = { "KIDS":"👦","REGULAR":"🙋","COUPLE":"💑","GROUP OF 3":"👨‍👩‍👧","GROUP OF 5":"👨‍👩‍👧‍👦" };
+        // ticketsContainer.insertAdjacentHTML("");
 
-  //     const iconMap = { "KIDS":"👦","REGULAR":"🙋","COUPLE":"💑","GROUP OF 3":"👨‍👩‍👧","GROUP OF 5":"👨‍👩‍👧‍👦" };
+      passes.forEach(ticket => {
+        const icon = iconMap[ticket.title.toUpperCase()] || "️‍👨‍👩‍👧‍👦";
+        const card = `
+           <div class="col-md-6 col-lg-4">
+             <div class="card ticket-card">
+               <div class="card-icon">${icon}</div>
+               <h5 class="fw-bold">${ticket.description}</h5>
+               <p class="fs-4 text-primary">₹${ticket.basePrice}</p>
+               <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.title} - ₹${ticket.basePrice}">Book Now</button>
+             </div>
+           </div>`;
+          const cardNew = `
+        <div class="col-md-6 col-lg-4">
+          <div class="card ticket-card">
+            <div class="card-icon">${icon}</div>
+            <h5 class="fw-bold">${ticket.description}</h5>
+            <!-- Discount / Base Price Line -->
+            <p class="small text-muted mb-1" style="min-height: 1.25rem;">
+              ${ticket.currentDiscount ? `
+                <span class="text-decoration-line-through me-2">₹${ticket.basePrice}</span>
+                <span class="text-success">${ticket.currentDiscount}</span>
+              ` : ''}
+            </p>
 
-  //     data.forEach(ticket => {
-  //       const icon = iconMap[ticket.name.toUpperCase()] || "🎟️";
-  //       const card = `
-  //         <div class="col-md-6 col-lg-4">
-  //           <div class="card ticket-card">
-  //             <div class="card-icon">${icon}</div>
-  //             <h5 class="fw-bold">${ticket.description}</h5>
-  //             <p class="fs-4 text-primary">₹${ticket.price}</p>
-  //             <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.name} - ₹${ticket.price}">Book Now</button>
-  //           </div>
-  //         </div>`;
-  //       ticketsContainer.insertAdjacentHTML("beforeend", card);
-  //     });
-  //   } catch(e) { console.error(e); }
-  // }
-  // document.addEventListener("DOMContentLoaded", loadTickets);
+            <!-- Current Price (always visible) -->
+            <p class="fs-4 text-primary mb-0 fw-bold">₹${ticket.currentPrice}</p>
+
+            <button class="btn book-btn" data-bs-toggle="modal" data-bs-target="#bookingModal" data-ticket="${ticket.title} - ₹${ticket.currentPrice}">Book Now</button>
+          </div>
+        </div>`;
+
+          ticketsContainer.insertAdjacentHTML("beforeend", cardNew);
+      });
+    } catch(e) { console.error(e); }
+  }
+  document.addEventListener("DOMContentLoaded", loadTickets);
 
   // ----- Modal logic -----
   
@@ -568,22 +741,6 @@ function validateNameModal() {
   }
 }
 
-// Email Validation (pattern)
-const modalEmailInput = document.getElementById('email');
-modalEmailInput.addEventListener('blur', validateEmailModal);
-modalEmailInput.addEventListener('keyup', validateEmailModal);
-
-function validateEmailModal() {
-  const email = modalEmailInput.value.trim();
-  const pattern = /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
-  if (pattern.test(email)) {
-    modalEmailInput.classList.remove('is-invalid');
-    modalEmailInput.classList.add('is-valid');
-  } else {
-    modalEmailInput.classList.remove('is-valid');
-    modalEmailInput.classList.add('is-invalid');
-  }
-}
 
 // Phone Validation (10-digit number)
 const modalPhoneInput = document.getElementById('phone');
@@ -631,15 +788,13 @@ bookingForm.addEventListener('input', function () {
   bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
     if (proceedBtn.disabled) return;
-     const message = `Ticket Booking Request: \nName: ${nameInput.value}\nEmail: ${emailInput.value}\nPhone: ${phoneInput.value}\nPass: ${selectedPassInput.value}\nQuantity: ${passQuantityInput.value}\nTotal: ${totalAmountInput.value}`;
+     const message = `Ticket Booking Request: \nName: ${nameInput.value}\nEmail: dummy@gmail.com\nPhone: ${phoneInput.value}\nPass: ${selectedPassInput.value}\nQuantity: ${passQuantityInput.value}\nTotal: ${totalAmountInput.value}`;
     // const newMeesage = `Name: ${name} \nPhone: ${phone} \nEmail: ${email} \n\Pass: ${pass}\nQuantity: ${quantity}\nAmount: ${amount} `;
-    window.open(`https://wa.me/917058746046?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/919665229671?text=${encodeURIComponent(message)}`, '_blank');
     bootstrap.Modal.getInstance(bookingModalEl).hide();
     setTimeout(() => bookingForm.reset(), 300);
   });
 })();
-
-
 
 
 // reset modal form
@@ -666,6 +821,43 @@ bookingModalEl.addEventListener('hidden.bs.modal', function () {
   // Reset selectedPrice
   selectedPrice = 0;
 });
+
+
+
+
+// =================== Early Bird Countdown Timer ===================
+function startCountdown(endDate) {
+  const countdownEl = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = endDate - now;
+
+    if (distance <= 0) {
+      countdownEl.innerHTML = "<div class='text-danger fw-bold fs-3'>Offer Expired!</div>";
+      // clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownEl.innerHTML = `
+      <div>${days}<span>Days</span></div>
+      <div>${hours}<span>Hours</span></div>
+      <div>${minutes}<span>Minutes</span></div>
+      <div>${seconds}<span>Seconds</span></div>
+    `;
+  }
+
+  updateCountdown();
+  const interval = setInterval(updateCountdown, 1000);
+}
+
+// Set Early Bird End Date (Example: 20 Sept 2025, 11:59 PM)
+startCountdown(new Date("September 25, 2025 23:59:59").getTime());
 
 </script>
 </body>
