@@ -761,18 +761,18 @@ function validatePhoneModal() {
   }
 }
 
-// Enable Proceed button only if all valid
-bookingForm.addEventListener('input', function () {
-  if (
-    /^[A-Za-z ]{2,}$/.test(modalNameInput.value.trim()) &&
-    /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(modalEmailInput.value.trim()) &&
-    /^[0-9]{10}$/.test(modalPhoneInput.value.trim())
-  ) {
-    proceedBtn.classList.remove('disabled');
-  } else {
-    proceedBtn.classList.add('disabled');
-  }
-});
+// // Enable Proceed button only if all valid
+// bookingForm.addEventListener('input', function () {
+//   if (
+//     /^[A-Za-z ]{2,}$/.test(modalNameInput.value.trim()) &&
+//     /^[a-z0-9._%+\-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(modalEmailInput.value.trim()) &&
+//     /^[0-9]{10}$/.test(modalPhoneInput.value.trim())
+//   ) {
+//     proceedBtn.classList.remove('disabled');
+//   } else {
+//     proceedBtn.classList.add('disabled');
+//   }
+// });
 
 // ----------------------- whatsapp submit -----------------------------------
 
@@ -807,8 +807,7 @@ bookingModalEl.addEventListener('hidden.bs.modal', function () {
 
   // Clear validation classes
   modalNameInput.classList.remove('is-valid', 'is-invalid');
-  modalEmailInput.classList.remove('is-valid', 'is-invalid');
-  modalPhoneInput.classList.remove('is-valid', 'is-invalid');
+   modalPhoneInput.classList.remove('is-valid', 'is-invalid');
 
   // Clear selected pass and total
   selectedPassInput.value = '';
@@ -828,29 +827,6 @@ bookingModalEl.addEventListener('hidden.bs.modal', function () {
 // =================== Early Bird Countdown Timer ===================
 function startCountdown(endDate) {
   const countdownEl = document.getElementById("countdown");
-
-  // function updateCountdown() {
-  //   const now = new Date().getTime();
-  //   const distance = endDate - now;
-
-  //   if (distance <= 0) {
-  //     countdownEl.innerHTML = "<div class='text-danger fw-bold fs-3'>Offer Expired!</div>";
-  //     // clearInterval(interval);
-  //     return;
-  //   }
-
-  //   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  //   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  //   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  //   countdownEl.innerHTML = `
-  //     <div>${days}<span>Days</span></div>
-  //     <div>${hours}<span>Hours</span></div>
-  //     <div>${minutes}<span>Minutes</span></div>
-  //     <div>${seconds}<span>Seconds</span></div>
-  //   `;
-  // }/
 
   function updateCountdown() {
   const now = new Date().getTime();
@@ -878,7 +854,7 @@ function startCountdown(endDate) {
 }
 
 // Set Early Bird End Date (Example: 20 Sept 2025, 11:59 PM)
-startCountdown(new Date("September 27, 2025 16:59:59").getTime());
+startCountdown(new Date("September 27, 2025 15:59:59").getTime());
 
 </script>
 </body>
