@@ -412,7 +412,7 @@
   const totalAmountInput = document.getElementById("totalAmount");
   const proceedBtn = document.getElementById("proceedBtn");
   const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
+  // const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
   
   let selectedPrice = 0;
@@ -829,35 +829,56 @@ bookingModalEl.addEventListener('hidden.bs.modal', function () {
 function startCountdown(endDate) {
   const countdownEl = document.getElementById("countdown");
 
+  // function updateCountdown() {
+  //   const now = new Date().getTime();
+  //   const distance = endDate - now;
+
+  //   if (distance <= 0) {
+  //     countdownEl.innerHTML = "<div class='text-danger fw-bold fs-3'>Offer Expired!</div>";
+  //     // clearInterval(interval);
+  //     return;
+  //   }
+
+  //   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  //   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  //   countdownEl.innerHTML = `
+  //     <div>${days}<span>Days</span></div>
+  //     <div>${hours}<span>Hours</span></div>
+  //     <div>${minutes}<span>Minutes</span></div>
+  //     <div>${seconds}<span>Seconds</span></div>
+  //   `;
+  // }/
+
   function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = endDate - now;
+  const now = new Date().getTime();
+  const distance = endDate - now;
 
-    if (distance <= 0) {
-      countdownEl.innerHTML = "<div class='text-danger fw-bold fs-3'>Offer Expired!</div>";
-      // clearInterval(interval);
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdownEl.innerHTML = `
-      <div>${days}<span>Days</span></div>
-      <div>${hours}<span>Hours</span></div>
-      <div>${minutes}<span>Minutes</span></div>
-      <div>${seconds}<span>Seconds</span></div>
-    `;
+  if (distance <= 0) {
+    countdownEl.innerHTML = "<div class='text-danger fw-bold fs-3'>Offer Expired!</div>";
+    return;
   }
+
+  // remove days calculation
+  const hours = Math.floor(distance / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownEl.innerHTML = `
+    <div>${hours}<span>Hours</span></div>
+    <div>${minutes}<span>Minutes</span></div>
+    <div>${seconds}<span>Seconds</span></div>
+  `;
+}
 
   updateCountdown();
   const interval = setInterval(updateCountdown, 1000);
 }
 
 // Set Early Bird End Date (Example: 20 Sept 2025, 11:59 PM)
-startCountdown(new Date("September 26, 2025 23:59:59").getTime());
+startCountdown(new Date("September 27, 2025 16:59:59").getTime());
 
 </script>
 </body>
